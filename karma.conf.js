@@ -27,7 +27,7 @@ module.exports = function(config) {
       'karma-jasmine',
       'karma-jasmine-jquery',
       //'karma-jasmine-jquery-preload',
-      //'karma-remoteload-preprocessor',
+      'karma-remoteload-preprocessor',
       'karma-chrome-launcher',
       'karma-phantomjs-launcher',
       'karma-firefox-launcher',
@@ -46,7 +46,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      //'./test/jquery.borderize.spec.js': 'remoteload',
+       './test/jquery.borderize.spec.js': 'remoteload',
        './**/*.html': ['html2js'],
       './fixtures/**/*.html': 'html2js'
     },
@@ -56,12 +56,9 @@ module.exports = function(config) {
         {
           regex: /loadFixtures\(\"(.*)\"\);/g,
           groupIndex: 1,
-          //substitute: "(function(resource) {console.log(resource);setFixtures(window.__html__[resource]);}('%RESOURCE%'))"
-          //substitute: "(function(resource) {console.log(resource);console.log(window.__html__[resource]);setFixtures(window.__html__[resource]);}('%RESOURCE%'));"
-          //substitute: "setFixtures(window.__html__['%RESOURCE%']);"
-
-           substitute: "(function(resource) {console.log(resource); console.log(window.__html__[resource]);}(\"%RESOURCE%\"))"
-           //substitute: "console.log('%RESOURCE%');"
+          substitute: "setFixtures(window.__html__['%RESOURCE%']);"
+          // DEBUG-VERSION
+          // substitute: "(function(resource) {console.log(resource); console.log(window.__html__[resource]);setFixtures(window.__html__[resource]);}(\"%RESOURCE%\"))"
         }
       ],
       dir: "fixtures/"
